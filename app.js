@@ -12,6 +12,7 @@ mongoose.connect('mongodb://sys:'+ process.env.MONGO_ATLAS_PW + '@node-isa-shard
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
+add.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

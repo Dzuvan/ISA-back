@@ -8,7 +8,7 @@ const Product = require('../models/product');
 router.get('/', (req, res, next) => {
     Order.find()
         .exec()
-        .select('product qunatity _id')
+        .select('product quantity _id')
         .then((docs) => {
             res.status(200).json({
                 count: docs.quantity,
