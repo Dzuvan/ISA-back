@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGO_ATLAS_PW" : "sysdba"
+        "MONGO_ATLAS_PW": "sysdba",
+        "JWT_KEY": "secret"
     }
 }

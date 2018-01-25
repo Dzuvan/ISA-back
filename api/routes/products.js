@@ -25,7 +25,7 @@ const upload = multer({
     limits: {
         fileSize: 1024 * 1024 * 5,
     },
-    fileFilter : fileFilter,
+    fileFilter: fileFilter,
 });
 
 const Product = require('../models/product');
@@ -50,12 +50,12 @@ router.get('/', (req, res, next) => {
                     }
                 }),
             };
-            res.status(200).json(response);
+            return res.status(200).json(response);
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({
-                error: err
+            return res.status(500).json({
+                error: err,
             });
         })
 });
@@ -86,7 +86,9 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
             });
         }).catch((err) => {
             console.log(err);
-            error: err;
+            return res.status(500).json({
+                error: err,
+            });
         });
 });
 
@@ -98,7 +100,7 @@ router.get('/:productId', (req, res, next) => {
         .then((doc) => {
             console.log("From db: ", doc);
             if (doc) {
-                res.status(200).json({
+                return res.status(200).json({
                     product: doc,
                     request: {
                         type: 'GET',
@@ -107,12 +109,12 @@ router.get('/:productId', (req, res, next) => {
                     }
                 });
             } else {
-                res.status(404).json({ message: "No valid product found" });
+                return res.status(404).json({ message: "No valid product found" });
             }
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({
+            return res.status(500).json({
                 error: err,
             })
         });
@@ -127,7 +129,7 @@ router.patch('/:productId', (req, res, next) => {
     Product.update({ _id: id }, { $set: updateOps })
         .exec()
         .then((result) => {
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Product updated',
                 request: {
                     type: 'GET',
@@ -137,7 +139,7 @@ router.patch('/:productId', (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({
+            return res.status(500).json({
                 error: err,
             });
         });
@@ -148,7 +150,7 @@ router.delete('/:productId', (req, res, next) => {
     Product.remove({ _id: id })
         .exec()
         .then((result) => {
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Product deleted',
                 request: {
                     type: 'POST',
@@ -159,8 +161,8 @@ router.delete('/:productId', (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({
-                error: err
+            return res.status(500).json({
+                error: err,
             });
         });
 });

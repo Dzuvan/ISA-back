@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
         .exec()
         .select('product quantity _id')
         .then((docs) => {
-            res.status(200).json({
+            return res.status(200).json({
                 count: docs.quantity,
                 orders: docs.map((doc) => {
                     return {
@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
             })
         })
         .catch((err) => {
-            res.status(500).json({
+            return res.status(500).json({
                 error: err,
             });
         });
@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
         })
         .then((result) => {
             console.log(result);
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Order stored',
                 createdOrder: {
                     _id: result._id,
@@ -63,7 +63,7 @@ router.post('/', (req, res, next) => {
             });
         })
         .catch((err) => {
-            res.status(500).json({
+            return res.status(500).json({
                 message: 'Product not found',
                 error: err,
             })
@@ -100,7 +100,7 @@ router.delete('/:orderId', (req, res, next) => {
     })
         .exec()
         .then((result) => {
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Order deleted',
                 request: {
                     type: 'POST',
