@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
+// mongoose.connect('mongodb+srv://sys:' + process.env.MONGO_ATLAS_PW + '@node-isa-i1kmg.mongodb.net/test');
+mongoose.connect('mongodb://sys:'+ process.env.MONGO_ATLAS_PW + '@node-isa-shard-00-00-i1kmg.mongodb.net:27017,node-isa-shard-00-01-i1kmg.mongodb.net:27017,node-isa-shard-00-02-i1kmg.mongodb.net:27017/test?ssl=true&replicaSet=node-isa-shard-0&authSource=admin')
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders')
 
