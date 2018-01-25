@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 
-const storage = multer.disStorage({
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads/');
     },
