@@ -1,0 +1,27 @@
+{
+  "name": "isa",
+  "version": "0.0.1",
+  "description": "College project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dzuvan/ISA.git"
+  },
+  "keywords": [
+    "College",
+    "ISA",
+    "project"
+  ],
+  "author": "Jovan Hrnjak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dzuvan/ISA/issues"
+  },
+  "homepage": "https://github.com/Dzuvan/ISA#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
