@@ -61,7 +61,7 @@ exports.orders_add_new = (req, res, next) => {
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         message: 'Product not found',
         error: err,
       });
@@ -77,7 +77,7 @@ exports.orders_get_one = (req, res, next) => {
           message: 'Order not found',
         });
       }
-      return res.status(200).json({
+      res.status(200).json({
         order: result,
         request: {
           type: 'GET',
@@ -86,7 +86,7 @@ exports.orders_get_one = (req, res, next) => {
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });
@@ -98,7 +98,7 @@ exports.orders_delete_one = (req, res, next) => {
   })
     .exec()
     .then((result) => {
-      return res.status(200).json({
+      res.status(200).json({
         message: 'Order deleted',
         request: {
           type: 'POST',
@@ -108,7 +108,7 @@ exports.orders_delete_one = (req, res, next) => {
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });

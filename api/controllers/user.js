@@ -30,12 +30,11 @@ exports.user_signup = (req, res, next) => {
         });
         user.save()
           .then((result) => {
-            return res.status(201).json({
+            res.status(201).json({
               message: 'User created',
             });
-          })
-          .catch((errr) => {
-            return status(500).json({
+          }).catch((errr) => {
+            res.status(500).json({
               error: errr,
             });
           });
@@ -74,13 +73,13 @@ exports.user_login = (req, res, next) => {
             token,
           });
         }
-        return res.status(401).json({
+        res.status(401).json({
           message: 'Auth failed',
         });
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });
@@ -90,12 +89,41 @@ exports.user_delete = (req, res, next) => {
   User.remove({ _id: req.params.userId })
     .exec()
     .then((result) => {
-      return res.status(200).json({
+      res.status(200).json({
         message: 'User removed.',
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+exports.users_get_all = (req, res, next) => {
+  User.find()
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        users: docs.map(doc => ({
+          _id: doc._id,
+          email: doc.email,
+          password: doc.password,
+          firstName: doc.firstName,
+          lastName: doc.lastName,
+          city: doc.city,
+          phone: doc.phone,
+          request: {
+            type: 'GET',
+            url: `http://localhost:3000/user/${doc._id}`,
+          },
+        })),
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
         error: err,
       });
     });

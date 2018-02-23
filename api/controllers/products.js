@@ -20,13 +20,12 @@ exports.products_get_all = (req, res, next) => {
           },
         })),
       };
-      return res.status(200).json(response);
+      res.status(200).json(response);
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
-      // console.log(err);
     });
 };
 
@@ -40,7 +39,6 @@ exports.products_add_one = (req, res, next) => {
   product
     .save()
     .then((result) => {
-      // console.log(result);
       res.status(201).json({
         message: 'Created product',
         createdProduct: {
@@ -54,8 +52,7 @@ exports.products_add_one = (req, res, next) => {
         },
       });
     }).catch((err) => {
-      // console.log(err);
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });
@@ -67,7 +64,6 @@ exports.products_get_one = (req, res, next) => {
     .select('name price _id productImage')
     .exec()
     .then((doc) => {
-      // console.log('From db: ', doc);
       if (doc) {
         return res.status(200).json({
           product: doc,
@@ -78,11 +74,10 @@ exports.products_get_one = (req, res, next) => {
           },
         });
       }
-      return res.status(404).json({ message: 'No valid product found' });
+      res.status(404).json({ message: 'No valid product found' });
     })
     .catch((err) => {
-      // console.log(err);
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });
@@ -104,8 +99,7 @@ exports.products_update_one = (req, res, next) => {
       },
     }))
     .catch((err) => {
-      // console.log(err);
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });
@@ -124,7 +118,7 @@ exports.products_delete_one = (req, res, next) => {
       },
     }))
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         error: err,
       });
     });

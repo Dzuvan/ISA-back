@@ -30,7 +30,7 @@ app.use((res, req, next) => {
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
-app.use ('/user', userRoutes);
+app.use ('/users', userRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
