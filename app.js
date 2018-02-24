@@ -8,8 +8,9 @@ const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders')
 const userRoutes = require('./api/routes/user');
 
+const configuration = require('config');
 // mongoose.connect('mongodb+srv://sys:' + process.env.MONGO_ATLAS_PW + '@node-isa-i1kmg.mongodb.net/test');
-mongoose.connect('mongodb://sys:'+ process.env.MONGO_ATLAS_PW + '@node-isa-shard-00-00-i1kmg.mongodb.net:27017,node-isa-shard-00-01-i1kmg.mongodb.net:27017,node-isa-shard-00-02-i1kmg.mongodb.net:27017/test?ssl=true&replicaSet=node-isa-shard-0&authSource=admin')
+mongoose.connect('mongodb://sys:'+ configuration.MONGO_ATLAS_PW + '@node-isa-shard-00-00-i1kmg.mongodb.net:27017,node-isa-shard-00-01-i1kmg.mongodb.net:27017,node-isa-shard-00-02-i1kmg.mongodb.net:27017/test?ssl=true&replicaSet=node-isa-shard-0&authSource=admin')
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
