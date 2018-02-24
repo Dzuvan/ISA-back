@@ -1,7 +1,7 @@
 {
-  "name": "isa",
+  "name": "isa-back",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Node.js project",
   "author": "dzuvan <hrnjak.jovan1@gmail.com>",
   "private": true,
   "main": "index.js",
