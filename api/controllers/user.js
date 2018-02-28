@@ -128,3 +128,28 @@ exports.users_get_all = (req, res, next) => {
       });
     });
 };
+
+exports.users_get_one = (req, res, next) => {
+  const id = req.params.userId;
+  User.findById(id)
+    .select()
+    .exec()
+    .then((doc) => {
+      if (doc) {
+        return res.status(200).json({
+          user: doc,
+          request: {
+            type: 'GET',
+            description: 'Get all users',
+            url: 'http://localhost:3000/users',
+          },
+        });
+      }
+      res.status(404).json({ message: 'No user found' });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+};

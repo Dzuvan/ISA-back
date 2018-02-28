@@ -1,55 +1,30 @@
- process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 
+var request = require('supertest');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
+const sinon = require('sinon');
 
-const User = require('../api/models/user');
+const controller = require('../api/controllers/user');
 const server = require('../server');
 
 const should = chai.should();
-const chaiAsPromised = require("chai-as-promised");
-
 chai.use(chaiHttp);
-chai.use(chaiAsPromised);
 
-//TODO(Jovan): BeforeEach, AfterEach dummy user for testing purposes.
-
-  describe(' users', function(done) {
-    it('should list ALL users on / GET', function(done) {
-      chai.request(server)
-        .get('/users')
-        .end(function(err,res) {
-          res.should.have.status(200);
-          done();
-        });
-      });
-
-    it('should DELETE user on DELETE', function(done) {
-      chai.request(server)
-      .delete('/users/' + user._id)
-      .end(function(err, res) {
-        res.should.have.status(200);
-        done();
-      })
+describe('Users Test', function() {
+  this.timeout(10000);
+  it('should show status 200 on / GET', function(done) {
+    const userStub = sinon.stub(controller, "users_get_all").callsFake(function(req, res, next){
+      res.status(200).json({ stubbed: 'data' });
     });
-
-    it('should create SINGLE user on POST', function(done) {
-      const user = new User({
-        _id: mongoose.Types.ObjectId(),
-        firstName: 'Test',
-        lastName: 'Test',
-        city: 'TestCity',
-        phone: 1234578,
-        email: 'test@test.com',
-        password: 'test',
-      });
-      chai.request(server)
-      .post('/users/signup')
-      .send(user)
-      .end(function(err, res) {
-        res.should.have.status(201);
+    request(server)
+      .get('/users')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res){
+        if (err) return done(err);
         done();
       });
-    });
   });
+});
