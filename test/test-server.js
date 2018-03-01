@@ -59,6 +59,22 @@ describe('Users Test', function() {
       });
   });
 
+  it('should show status 200 on /:id  DELETE', function(done) {
+    this.timeout(10000);
+    const userStub = sinon.stub(controller, "user_delete").callsFake(function(req, res, next){
+      res.status(200).json({});
+    });
+    request(server)
+      .delete('/users/')
+      .query({ userId:'5a91caf5ae438f3a732a85df' })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res){
+        if (err) return done(err);
+        done();
+      });
+  });
+
   it('should show status 201 on /signup POST', function(done) {
     this.timeout(10000);
     const userStub = sinon.stub(controller, "user_signup").callsFake(function(req, res, next){
@@ -72,13 +88,14 @@ describe('Users Test', function() {
           phone: req.body.phone,
       });
     });
-    const user = new User({ _id:mongoose.Types.ObjectId(),
-      email:'proba@proba.com',
-      password:'test',
-      firstName:'proba',
-      lastName:'proba',
-      city:'probaCity',
-      phone:'12346798'
+    const user = new User({
+      _id: mongoose.Types.ObjectId(),
+      email: 'proba@proba.com',
+      password: 'test',
+      firstName: 'proba',
+      lastName: 'proba',
+      city: 'probaCity',
+      phone: '12346798'
     });
     request(server)
       .post('/users/signup')
