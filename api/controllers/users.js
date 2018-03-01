@@ -153,3 +153,25 @@ exports.users_get_one = (req, res, next) => {
       });
     });
 };
+
+exports.users_update_one = (req, res, next) => {
+  const id = req.params.userId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  User.update({ _d: id }, { $set: updateOps })
+    .exec()
+    .then(result => res.status(200).json({
+      message: 'User updated',
+      request: {
+        type: 'GET',
+        url: `http://localhost:3000/users/${id}`,
+      },
+    }))
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
