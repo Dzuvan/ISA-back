@@ -1,7 +1,4 @@
-/*
-TODO(Jovan):
-  - konfiguracija segmenata i mesta u salama
-*/
+
 const mongoose = require('mongoose');
 
 const establishmentSchema = mongoose.Schema({

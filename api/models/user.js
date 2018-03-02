@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
   lastName: { type: String, required: true },
   city: { type: String, required: true },
   phone: { type: Number, required: true },
+  friends: { type: Array },
 });
 
 module.exports = mongoose.model('User', userSchema);
