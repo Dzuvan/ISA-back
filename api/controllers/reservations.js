@@ -108,7 +108,6 @@ exports.reservations_update_one = (req, res, next) => {
     });
 };
 
-
 exports.reservations_delete_one = (req, res, next) => {
   const id = req.params.reservationId;
   Reservation.remove({ _id: id })
