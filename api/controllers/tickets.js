@@ -113,7 +113,7 @@ exports.tickets_update_one = (req, res, next) => {
     });
 };
 
-exports.tickets.delete_one = (req, res, next) => {
+exports.tickets_delete_one = (req, res, next) => {
   const id = req.params.ticketId;
   Ticket.remove({ _id: id })
     .exec()
