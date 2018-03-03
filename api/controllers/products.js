@@ -70,7 +70,7 @@ exports.products_get_one = (req, res, next) => {
           request: {
             type: 'GET',
             description: 'Get all products',
-            url: 'http://localhost:3000/products/',
+            url: 'http://localhost:3000/products',
           },
         });
       }

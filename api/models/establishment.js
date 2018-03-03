@@ -11,11 +11,11 @@ const establishmentSchema = mongoose.Schema({
     match: /^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/,
   },
   averageRating: { type: Number },
-  seats: { type: Array, required: true },
+  freeSeats: { type: Array, required: true },
   repertoire: { type: Array, required: true },
   establishmentType: { type: Number, required: true },
   discountedTickets: { type: Array, required: true },
-  configurationOfSeats: { type: Array, required: true },
+  configurationOfSeats: { type: Array, required: true }, // iffy
 });
 
 module.exports = mongoose.model('Establishment', establishmentSchema);
