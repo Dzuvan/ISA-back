@@ -31,7 +31,7 @@ exports.reservations_get_all = (req, res, next) => {
 
 exports.reservations_add_one = (req, res, next) => {
   const reservation = new Reservation({
-    _id: mongoose.Types.ObjectId(),
+    _id: new mongoose.Types.ObjectId(),
     user: req.body.user,
     date: req.body.date,
     quantity: req.body.quantity,

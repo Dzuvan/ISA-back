@@ -25,10 +25,6 @@ const ticketSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  row: {
-    type: Number,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model('Ticket', ticketSchema);

@@ -39,7 +39,7 @@ exports.shows_get_all = (req, res, next) => {
 
 exports.shows_add_one = (req, res, next) => {
   const show = new Show({
-    _id: req._id,
+    _id: new mongoose.Types.ObjectId(),
     name: req.name,
     genre: req.genre,
     length: req.length,
@@ -55,7 +55,7 @@ exports.shows_add_one = (req, res, next) => {
   show.save()
     .then((result) => {
       res.staus(201).json({
-        message: 'Create show',
+        message: 'Created show',
         createdShow: {
           _id: result._id,
           name: result.name,
