@@ -5,7 +5,6 @@ const Room = require('../models/room');
 exports.rooms_get_all = (req, res, next) => {
   Room.find()
     .exec()
-    .select()
     .then((docs) => {
       const response = {
         count: docs.length,
