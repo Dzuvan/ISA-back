@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema({
   city: { type: String, required: true },
   phone: { type: Number, required: true },
   friends: { type: Array },
+  role: { type: Number, required: true },
 });
 
 module.exports = mongoose.model('User', userSchema);
